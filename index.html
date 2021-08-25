@@ -5,31 +5,29 @@
             canv = document.getElementById("c")
             ctx = canv.getContext("2d")
             document.addEventListener("keydown", keyPush)
-            setInterval(game, 37)
+            setInterval(game, 1000/144)
         }
         const bird = new Image();
         bird.src = "bird.png";
         birdY = 300
-        birdspeed = 5
+        birdspeed = 1
         birdX = 15
         pipeX = 585
         pipesizet = 350
         pipesizep = 450
         pipewidth = 25
         score=0
-
+     
         function game() {
-
             ctx.fillStyle = "skyblue";
             ctx.fillRect(0, 0, canv.width, canv.height);
-
             birdY += birdspeed
+
             //speed limit
             if (birdspeed <= 20) {
-
-                birdspeed += 2
-
+                birdspeed += 0.1
             }
+
             //check pipe off screen
             if (pipeX < birdX) {
                 pipeX = 585
@@ -38,10 +36,8 @@
 
             if ((birdY < pipesizet || birdY > pipesizet + 150) && pipeX < 24 * (800 / 600)) {
                 score=0
-
-
                 birdY = 300
-                birdspeed = 5
+                birdspeed = 1
                 birdX = 15
                 pipeX = 585
                 pipesizet = 350
@@ -53,40 +49,25 @@
             if(pipeX < 24 ){
                 score++
             }
-            //write score
+
             ctx.fillStyle = "black";
             ctx.fillText(score, 150, 150);
 
-
             ctx.drawImage(bird, birdX, birdY, 24 * (800 / 600), 24);
             ctx.fillStyle = "lime";
-            pipeX -= 10
+            pipeX -= 2
 
             ctx.fillRect(pipeX, 0, pipewidth, pipesizet)//top pipe
             ctx.fillRect(pipeX, pipesizet + 150, pipewidth, canv.width)//bottom pipe
-
-
-
-
         }
         function keyPush(evt) {
-
-            //keypush space
-            //spacebar keycode is = 32
             switch (evt.keyCode) {
                 case 32:
-
-
-
-                    birdspeed = -20
+                    birdspeed = -5
                     break;
 
             }
 
         }
-
-
-
-
     </script>
 </body>
